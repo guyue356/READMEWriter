@@ -90,102 +90,6 @@
 
 ---
 
-## 系统架构
-
-```mermaid
-flowchart TD
-    User[用户] -->|输入触发指令| AI[AI 编码工具]
-
-    subgraph Skill["Skill 技能包"]
-        SKILL[SKILL.md<br/>主技能定义]
-        AGENTS[AGENTS.md<br/>伴侣指令]
-        REF_SEC[references/<br/>section-guides.md]
-        REF_MER[references/<br/>mermaid-patterns.md]
-        TEMPLATE[assets/<br/>readme-template.md]
-    end
-
-    AI -->|加载技能| SKILL
-    SKILL --> AGENTS
-    SKILL --> REF_SEC
-    SKILL --> REF_MER
-    SKILL --> TEMPLATE
-
-    subgraph Analysis["仓库分析阶段"]
-        SCAN[Step 1: 仓库扫描<br/>识别项目类型、语言、框架]
-        DEEP[Step 2: 深度分析<br/>源代码、配置、API、Agent]
-        GEN[Step 3: 文档生成<br/>按标准结构输出 README]
-        QC[Step 4: 质量检查<br/>格式、技术、表达自检]
-    end
-
-    AI --> SCAN --> DEEP --> GEN --> QC
-    QC --> Output[输出 README.md]
-```
-
-| 模块                               | 职责                                                         |
-| ---------------------------------- | ------------------------------------------------------------ |
-| `SKILL.md`                       | 主技能定义文件，包含完整的指令规范、工作流程和输出要求       |
-| `AGENTS.md`                      | 伴侣指令文件，提供精简版技能描述，兼容不同 AI 工具的加载方式 |
-| `references/section-guides.md`   | 各章节详细写作指南，定义每个 README 章节的内容要求和写作要点 |
-| `references/mermaid-patterns.md` | 9 种常用 Mermaid 图模式库，覆盖架构图、流程图、时序图等场景  |
-| `assets/readme-template.md`      | README 完整模板，定义标准文档结构和占位符                    |
-| `install.sh`                     | 跨平台安装脚本，支持 10 个 AI 编码工具平台                   |
-
----
-
-## 核心工作流程
-
-```mermaid
-flowchart LR
-    Trigger[触发指令] --> Scan[仓库扫描]
-    Scan --> Identify[识别项目类型]
-    Identify --> Analyze[深度分析]
-    Analyze --> Generate[生成 README]
-    Generate --> Check[质量检查]
-    Check --> Output[输出文档]
-```
-
-1. **触发指令**：用户通过 `/github-readme-writer` 或自然语言激活技能
-2. **仓库扫描**：扫描项目根目录，识别项目类型（前端/后端/全栈/库/CLI/AI Agent）、主要语言、框架和依赖
-3. **深度分析**：根据项目类型，按优先级分析源代码、配置文件、API、数据库、Prompt、Agent 代码等 12 类资产
-4. **生成 README**：按照 `section-guides.md` 定义的标准结构，结合 `mermaid-patterns.md` 的图模式和 `readme-template.md` 的模板，生成完整文档
-5. **质量检查**：自检中文表达、逻辑结构、技术准确性、Mermaid 语法、表格格式等 7 项指标
-6. **输出文档**：生成可直接发布到 GitHub 的 README.md
-
----
-
-## 技术栈
-
-| 层级     | 技术                                  | 用途               | 选型理由                                 |
-| -------- | ------------------------------------- | ------------------ | ---------------------------------------- |
-| AI 平台  | Claude Code / Copilot CLI / Cursor 等 | 技能运行环境       | 覆盖主流 AI 编码工具，用户无迁移成本     |
-| 技能定义 | Markdown（SKILL.md）                  | Prompt 指令定义    | 可读性强，易于维护和扩展                 |
-| 安装脚本 | Bash                                  | 跨平台自动安装     | Unix 兼容性好，支持 macOS/Linux/Git Bash |
-| 图表引擎 | Mermaid                               | 架构图和流程图渲染 | GitHub 原生支持，零依赖                  |
-| 文档格式 | GitHub Markdown                       | README 输出格式    | GitHub 生态标准，兼容性最佳              |
-| 许可证   | MIT                                   | 开源协议           | 最宽松的许可之一，鼓励社区使用           |
-
----
-
-## 项目结构
-
-```text
-READMEWriter/
-├── LICENSE                                  # MIT 开源许可证
-├── README.md                                # 项目说明文档（本文件）
-└── github-readme-writer-skill/              # 技能包主目录
-    ├── SKILL.md                             # 主技能定义（核心文件）
-    ├── AGENTS.md                            # 伴侣指令文件
-    ├── README.md                            # 技能包内部说明
-    ├── install.sh                           # 跨平台安装脚本
-    ├── references/                          # 参考文档
-    │   ├── section-guides.md                # 各章节写作指南（21 章）
-    │   └── mermaid-patterns.md              # Mermaid 图模式库（9 种）
-    └── assets/                              # 资源文件
-        └── readme-template.md               # README 完整模板
-```
-
----
-
 ## 安装部署
 
 ### 环境要求
@@ -328,6 +232,102 @@ AI：
 
 ---
 
+## 系统架构
+
+```mermaid
+flowchart TD
+    User[用户] -->|输入触发指令| AI[AI 编码工具]
+
+    subgraph Skill["Skill 技能包"]
+        SKILL[SKILL.md<br/>主技能定义]
+        AGENTS[AGENTS.md<br/>伴侣指令]
+        REF_SEC[references/<br/>section-guides.md]
+        REF_MER[references/<br/>mermaid-patterns.md]
+        TEMPLATE[assets/<br/>readme-template.md]
+    end
+
+    AI -->|加载技能| SKILL
+    SKILL --> AGENTS
+    SKILL --> REF_SEC
+    SKILL --> REF_MER
+    SKILL --> TEMPLATE
+
+    subgraph Analysis["仓库分析阶段"]
+        SCAN[Step 1: 仓库扫描<br/>识别项目类型、语言、框架]
+        DEEP[Step 2: 深度分析<br/>源代码、配置、API、Agent]
+        GEN[Step 3: 文档生成<br/>按标准结构输出 README]
+        QC[Step 4: 质量检查<br/>格式、技术、表达自检]
+    end
+
+    AI --> SCAN --> DEEP --> GEN --> QC
+    QC --> Output[输出 README.md]
+```
+
+| 模块                               | 职责                                                         |
+| ---------------------------------- | ------------------------------------------------------------ |
+| `SKILL.md`                       | 主技能定义文件，包含完整的指令规范、工作流程和输出要求       |
+| `AGENTS.md`                      | 伴侣指令文件，提供精简版技能描述，兼容不同 AI 工具的加载方式 |
+| `references/section-guides.md`   | 各章节详细写作指南，定义每个 README 章节的内容要求和写作要点 |
+| `references/mermaid-patterns.md` | 9 种常用 Mermaid 图模式库，覆盖架构图、流程图、时序图等场景  |
+| `assets/readme-template.md`      | README 完整模板，定义标准文档结构和占位符                    |
+| `install.sh`                     | 跨平台安装脚本，支持 10 个 AI 编码工具平台                   |
+
+---
+
+## 核心工作流程
+
+```mermaid
+flowchart LR
+    Trigger[触发指令] --> Scan[仓库扫描]
+    Scan --> Identify[识别项目类型]
+    Identify --> Analyze[深度分析]
+    Analyze --> Generate[生成 README]
+    Generate --> Check[质量检查]
+    Check --> Output[输出文档]
+```
+
+1. **触发指令**：用户通过 `/github-readme-writer` 或自然语言激活技能
+2. **仓库扫描**：扫描项目根目录，识别项目类型（前端/后端/全栈/库/CLI/AI Agent）、主要语言、框架和依赖
+3. **深度分析**：根据项目类型，按优先级分析源代码、配置文件、API、数据库、Prompt、Agent 代码等 12 类资产
+4. **生成 README**：按照 `section-guides.md` 定义的标准结构，结合 `mermaid-patterns.md` 的图模式和 `readme-template.md` 的模板，生成完整文档
+5. **质量检查**：自检中文表达、逻辑结构、技术准确性、Mermaid 语法、表格格式等 7 项指标
+6. **输出文档**：生成可直接发布到 GitHub 的 README.md
+
+---
+
+## 技术栈
+
+| 层级     | 技术                                  | 用途               | 选型理由                                 |
+| -------- | ------------------------------------- | ------------------ | ---------------------------------------- |
+| AI 平台  | Claude Code / Copilot CLI / Cursor 等 | 技能运行环境       | 覆盖主流 AI 编码工具，用户无迁移成本     |
+| 技能定义 | Markdown（SKILL.md）                  | Prompt 指令定义    | 可读性强，易于维护和扩展                 |
+| 安装脚本 | Bash                                  | 跨平台自动安装     | Unix 兼容性好，支持 macOS/Linux/Git Bash |
+| 图表引擎 | Mermaid                               | 架构图和流程图渲染 | GitHub 原生支持，零依赖                  |
+| 文档格式 | GitHub Markdown                       | README 输出格式    | GitHub 生态标准，兼容性最佳              |
+| 许可证   | MIT                                   | 开源协议           | 最宽松的许可之一，鼓励社区使用           |
+
+---
+
+## 项目结构
+
+```text
+READMEWriter/
+├── LICENSE                                  # MIT 开源许可证
+├── README.md                                # 项目说明文档（本文件）
+└── github-readme-writer-skill/              # 技能包主目录
+    ├── SKILL.md                             # 主技能定义（核心文件）
+    ├── AGENTS.md                            # 伴侣指令文件
+    ├── README.md                            # 技能包内部说明
+    ├── install.sh                           # 跨平台安装脚本
+    ├── references/                          # 参考文档
+    │   ├── section-guides.md                # 各章节写作指南（21 章）
+    │   └── mermaid-patterns.md              # Mermaid 图模式库（9 种）
+    └── assets/                              # 资源文件
+        └── readme-template.md               # README 完整模板
+```
+
+---
+
 ## 配置说明
 
 本技能为纯 Prompt 指令型 Skill，无需配置环境变量或 API 密钥。所有配置均内置在技能文件中：
@@ -367,12 +367,12 @@ AI：
 
 ## Roadmap
 
-- [X] 核心技能定义（SKILL.md）
-- [X] 伴侣指令文件（AGENTS.md）
-- [X] 各章节写作指南（21 章）
-- [X] Mermaid 图模式库（9 种模式）
-- [X] README 完整模板
-- [X] 跨平台安装脚本（10 个平台）
+- [x] 核心技能定义（SKILL.md）
+- [x] 伴侣指令文件（AGENTS.md）
+- [x] 各章节写作指南（21 章）
+- [x] Mermaid 图模式库（9 种模式）
+- [x] README 完整模板
+- [x] 跨平台安装脚本（10 个平台）
 - [ ] 英文版 README 生成支持
 - [ ] 多语言输出支持（日语、韩语等）
 - [ ] 增量更新模式（基于 diff 更新已有 README）
