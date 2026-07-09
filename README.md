@@ -260,18 +260,9 @@ cp -R READMEWriter/github-readme-writer-skill ~/.claude/skills/github-readme-wri
 ## 快速开始
 
 ```bash
-# 1. 安装技能
-git clone https://github.com/guyue356/READMEWriter.git
-cd READMEWriter/github-readme-writer-skill
-chmod +x install.sh && ./install.sh
-
-# 2. 打开你的 AI 编码工具（如 Claude Code），进入任意项目目录
-cd /path/to/your/project
-
-# 3. 输入触发指令
+# 1. 安装（详见「安装部署」章节）
+# 2. 打开 AI 编码工具，进入目标项目目录，输入：
 /github-readme-writer
-
-# 4. AI 自动分析项目并生成 README.md
 ```
 
 ---
