@@ -196,24 +196,21 @@ READMEWriter/
 ### 自动安装（推荐）
 
 ```bash
-# 克隆仓库
-git clone <repo-url>
+# 1. 克隆仓库
+git clone https://github.com/guyue356/READMEWriter.git
+
+# 2. 进入技能目录并安装
 cd READMEWriter/github-readme-writer-skill
-
-# 赋予执行权限
 chmod +x install.sh
+./install.sh                  # 自动检测本机已安装的平台并安装
+```
 
-# 自动检测本机已安装的平台并安装
-./install.sh
+更多安装选项：
 
-# 或指定平台安装
-./install.sh --platform claude
-
-# 或安装到所有支持的平台
-./install.sh --all
-
-# 预览安装路径（不实际执行）
-./install.sh --dry-run
+```bash
+./install.sh --platform claude  # 指定平台安装
+./install.sh --all              # 安装到所有支持的平台
+./install.sh --dry-run          # 预览安装路径，不实际执行
 ```
 
 ### 支持的平台
@@ -233,20 +230,28 @@ chmod +x install.sh
 
 ### 手动安装
 
+如果不想使用安装脚本，也可以手动复制：
+
 ```bash
 # 以 Claude Code 为例
-cp -R github-readme-writer-skill ~/.claude/skills/github-readme-writer-skill
+git clone https://github.com/guyue356/READMEWriter.git
+cp -R READMEWriter/github-readme-writer-skill ~/.claude/skills/github-readme-writer-skill
 ```
+
+其他平台只需替换目标路径，参考上方「支持的平台」表格。
 
 ---
 
 ## 快速开始
 
 ```bash
-# 1. 安装技能（选择一种方式）
-./install.sh --platform claude
+# 1. 安装技能
+git clone https://github.com/guyue356/READMEWriter.git
+cd READMEWriter/github-readme-writer-skill
+chmod +x install.sh && ./install.sh
 
-# 2. 打开你的 AI 编码工具，进入任意项目目录
+# 2. 打开你的 AI 编码工具（如 Claude Code），进入任意项目目录
+cd /path/to/your/project
 
 # 3. 输入触发指令
 /github-readme-writer
@@ -258,26 +263,62 @@ cp -R github-readme-writer-skill ~/.claude/skills/github-readme-writer-skill
 
 ## 使用说明
 
-### 方式一：斜杠指令
+### 触发方式
+
+**斜杠指令**（推荐）：
 
 ```
 /github-readme-writer
 ```
 
-### 方式二：自然语言触发
+**自然语言触发**：
 
 ```
 帮我写一个完整的 README
 生成项目文档
 分析当前项目并生成 README
-写 README
 ```
 
-### 方式三：指定远程仓库
+### 使用流程
 
+安装完成后，在任意项目目录中打开 AI 编码工具，触发技能后 AI 会自动执行以下步骤：
+
+```text
+用户：/github-readme-writer
+
+AI：
+  1. 扫描项目根目录，识别项目类型、语言、框架
+  2. 深度分析源代码、配置文件、API、数据库等 12 类资产
+  3. 按标准结构生成完整中文 README
+  4. 输出 README.md 文件
+
+用户：（查看生成的 README，按需微调）
 ```
-/github-readme-writer https://github.com/user/repo
-```
+
+### 生成结果示例
+
+以本项目为例，触发后 AI 会生成包含以下章节的 README：
+
+| 章节 | 内容 |
+|------|------|
+| 项目名称 + 一句话描述 | 核心价值概括 |
+| 项目简介 | 背景、问题、价值 |
+| 核心能力 | 3-6 个功能点 |
+| 系统架构 | Mermaid 架构图 |
+| 核心工作流程 | 流程图 + 步骤说明 |
+| 技术栈 | 表格：层级/技术/用途/理由 |
+| 项目结构 | 目录树 + 职责说明 |
+| 安装部署 | 完整安装指南 |
+| 快速开始 | 5 分钟上手 |
+| ... | 共 20+ 章节 |
+
+### 自定义输出
+
+如需调整生成内容，编辑技能文件即可：
+
+- 增加/删除章节 → 编辑 `references/section-guides.md`
+- 修改图表样式 → 编辑 `references/mermaid-patterns.md`
+- 调整分析范围 → 编辑 `SKILL.md` 中的「分析范围」和「工作流程」
 
 ---
 
@@ -347,7 +388,7 @@ cp -R github-readme-writer-skill ~/.claude/skills/github-readme-writer-skill
 
 ```bash
 # 克隆仓库
-git clone <repo-url>
+git clone https://github.com/guyue356/READMEWriter.git
 cd READMEWriter
 
 # 编辑技能文件
