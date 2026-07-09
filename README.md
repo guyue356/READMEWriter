@@ -1,6 +1,6 @@
-# GitHub README Writer Skill
+# READMEWriter
 
-> 基于 AI Agent 的中文 GitHub README 智能生成器 — 深度分析项目仓库，一键生成可直接发布的技术文档。
+> 基于 AI Agent 的中文 GitHub README 智能生成器 — 深度分析项目仓库，一键生成可直接发布的README技术文档。
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
@@ -367,12 +367,12 @@ READMEWriter/
 
 ## Roadmap
 
-- [x] 核心技能定义（SKILL.md）
-- [x] 伴侣指令文件（AGENTS.md）
-- [x] 各章节写作指南（21 章）
-- [x] Mermaid 图模式库（9 种模式）
-- [x] README 完整模板
-- [x] 跨平台安装脚本（10 个平台）
+- [X] 核心技能定义（SKILL.md）
+- [X] 伴侣指令文件（AGENTS.md）
+- [X] 各章节写作指南（21 章）
+- [X] Mermaid 图模式库（9 种模式）
+- [X] README 完整模板
+- [X] 跨平台安装脚本（10 个平台）
 - [ ] 英文版 README 生成支持
 - [ ] 多语言输出支持（日语、韩语等）
 - [ ] 增量更新模式（基于 diff 更新已有 README）
