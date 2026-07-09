@@ -121,14 +121,14 @@ flowchart TD
     QC --> Output[输出 README.md]
 ```
 
-| 模块 | 职责 |
-|------|------|
-| `SKILL.md` | 主技能定义文件，包含完整的指令规范、工作流程和输出要求 |
-| `AGENTS.md` | 伴侣指令文件，提供精简版技能描述，兼容不同 AI 工具的加载方式 |
-| `references/section-guides.md` | 各章节详细写作指南，定义每个 README 章节的内容要求和写作要点 |
-| `references/mermaid-patterns.md` | 9 种常用 Mermaid 图模式库，覆盖架构图、流程图、时序图等场景 |
-| `assets/readme-template.md` | README 完整模板，定义标准文档结构和占位符 |
-| `install.sh` | 跨平台安装脚本，支持 10 个 AI 编码工具平台 |
+| 模块                               | 职责                                                         |
+| ---------------------------------- | ------------------------------------------------------------ |
+| `SKILL.md`                       | 主技能定义文件，包含完整的指令规范、工作流程和输出要求       |
+| `AGENTS.md`                      | 伴侣指令文件，提供精简版技能描述，兼容不同 AI 工具的加载方式 |
+| `references/section-guides.md`   | 各章节详细写作指南，定义每个 README 章节的内容要求和写作要点 |
+| `references/mermaid-patterns.md` | 9 种常用 Mermaid 图模式库，覆盖架构图、流程图、时序图等场景  |
+| `assets/readme-template.md`      | README 完整模板，定义标准文档结构和占位符                    |
+| `install.sh`                     | 跨平台安装脚本，支持 10 个 AI 编码工具平台                   |
 
 ---
 
@@ -155,14 +155,14 @@ flowchart LR
 
 ## 技术栈
 
-| 层级 | 技术 | 用途 | 选型理由 |
-|------|------|------|---------|
-| AI 平台 | Claude Code / Copilot CLI / Cursor 等 | 技能运行环境 | 覆盖主流 AI 编码工具，用户无迁移成本 |
-| 技能定义 | Markdown（SKILL.md） | Prompt 指令定义 | 可读性强，易于维护和扩展 |
-| 安装脚本 | Bash | 跨平台自动安装 | Unix 兼容性好，支持 macOS/Linux/Git Bash |
-| 图表引擎 | Mermaid | 架构图和流程图渲染 | GitHub 原生支持，零依赖 |
-| 文档格式 | GitHub Markdown | README 输出格式 | GitHub 生态标准，兼容性最佳 |
-| 许可证 | MIT | 开源协议 | 最宽松的许可之一，鼓励社区使用 |
+| 层级     | 技术                                  | 用途               | 选型理由                                 |
+| -------- | ------------------------------------- | ------------------ | ---------------------------------------- |
+| AI 平台  | Claude Code / Copilot CLI / Cursor 等 | 技能运行环境       | 覆盖主流 AI 编码工具，用户无迁移成本     |
+| 技能定义 | Markdown（SKILL.md）                  | Prompt 指令定义    | 可读性强，易于维护和扩展                 |
+| 安装脚本 | Bash                                  | 跨平台自动安装     | Unix 兼容性好，支持 macOS/Linux/Git Bash |
+| 图表引擎 | Mermaid                               | 架构图和流程图渲染 | GitHub 原生支持，零依赖                  |
+| 文档格式 | GitHub Markdown                       | README 输出格式    | GitHub 生态标准，兼容性最佳              |
+| 许可证   | MIT                                   | 开源协议           | 最宽松的许可之一，鼓励社区使用           |
 
 ---
 
@@ -193,7 +193,22 @@ READMEWriter/
 - 已安装以下任一 AI 编码工具：Claude Code、GitHub Copilot CLI、Codex CLI、Gemini CLI、Cursor、Cline、Windsurf、Trae、Kiro、Roo Code
 - Bash 环境（macOS/Linux 自带，Windows 需 Git Bash 或 WSL）
 
-### 自动安装（推荐）
+### 方式一：让 AI 自己安装（最简单）
+
+打开你的 AI 编码工具，直接粘贴以下提示词，AI 会自动完成安装：
+
+```
+请帮我安装 github-readme-writer 技能：
+
+1. 克隆仓库：git clone https://github.com/guyue356/READMEWriter.git
+2. 将 READMEWriter/github-readme-writer-skill 目录复制到你自己的技能目录中
+   （Claude Code 为 ~/.claude/skills/，其他工具参考 README 中的平台表格）
+3. 确认安装成功后告诉我
+```
+
+AI 会自动执行克隆、复制、验证，全程无需手动操作。
+
+### 方式二：脚本自动安装
 
 ```bash
 # 1. 克隆仓库
@@ -215,20 +230,20 @@ chmod +x install.sh
 
 ### 支持的平台
 
-| 平台 | 技能目录 |
-|------|---------|
-| Claude Code | `~/.claude/skills/` |
-| GitHub Copilot CLI | `~/.copilot/skills/` |
-| Codex CLI | `~/.agents/skills/` |
-| Gemini CLI | `~/.gemini/skills/` |
-| Kiro | `~/.kiro/skills/` |
-| Cline | `~/.cline/skills/` |
-| Roo Code | `~/.roo/skills/` |
-| Cursor | `.cursor/skills/`（项目级） |
-| Windsurf | `~/.codeium/windsurf/skills/` |
-| Trae | `.trae/rules/`（项目级） |
+| 平台               | 技能目录                        |
+| ------------------ | ------------------------------- |
+| Claude Code        | `~/.claude/skills/`           |
+| GitHub Copilot CLI | `~/.copilot/skills/`          |
+| Codex CLI          | `~/.agents/skills/`           |
+| Gemini CLI         | `~/.gemini/skills/`           |
+| Kiro               | `~/.kiro/skills/`             |
+| Cline              | `~/.cline/skills/`            |
+| Roo Code           | `~/.roo/skills/`              |
+| Cursor             | `.cursor/skills/`（项目级）   |
+| Windsurf           | `~/.codeium/windsurf/skills/` |
+| Trae               | `.trae/rules/`（项目级）      |
 
-### 手动安装
+### 方式三：手动安装
 
 如果不想使用安装脚本，也可以手动复制：
 
@@ -299,18 +314,18 @@ AI：
 
 以本项目为例，触发后 AI 会生成包含以下章节的 README：
 
-| 章节 | 内容 |
-|------|------|
-| 项目名称 + 一句话描述 | 核心价值概括 |
-| 项目简介 | 背景、问题、价值 |
-| 核心能力 | 3-6 个功能点 |
-| 系统架构 | Mermaid 架构图 |
-| 核心工作流程 | 流程图 + 步骤说明 |
-| 技术栈 | 表格：层级/技术/用途/理由 |
-| 项目结构 | 目录树 + 职责说明 |
-| 安装部署 | 完整安装指南 |
-| 快速开始 | 5 分钟上手 |
-| ... | 共 20+ 章节 |
+| 章节                  | 内容                      |
+| --------------------- | ------------------------- |
+| 项目名称 + 一句话描述 | 核心价值概括              |
+| 项目简介              | 背景、问题、价值          |
+| 核心能力              | 3-6 个功能点              |
+| 系统架构              | Mermaid 架构图            |
+| 核心工作流程          | 流程图 + 步骤说明         |
+| 技术栈                | 表格：层级/技术/用途/理由 |
+| 项目结构              | 目录树 + 职责说明         |
+| 安装部署              | 完整安装指南              |
+| 快速开始              | 5 分钟上手                |
+| ...                   | 共 20+ 章节               |
 
 ### 自定义输出
 
@@ -326,12 +341,12 @@ AI：
 
 本技能为纯 Prompt 指令型 Skill，无需配置环境变量或 API 密钥。所有配置均内置在技能文件中：
 
-| 配置文件 | 作用 | 可自定义项 |
-|---------|------|-----------|
-| `SKILL.md` | 主技能定义 | 分析范围、输出结构、质量检查清单 |
-| `references/section-guides.md` | 章节写作指南 | 各章节的内容要求和写作要点 |
-| `references/mermaid-patterns.md` | Mermaid 图模式 | 图表类型和使用场景 |
-| `assets/readme-template.md` | README 模板 | 文档结构和占位符 |
+| 配置文件                           | 作用           | 可自定义项                       |
+| ---------------------------------- | -------------- | -------------------------------- |
+| `SKILL.md`                       | 主技能定义     | 分析范围、输出结构、质量检查清单 |
+| `references/section-guides.md`   | 章节写作指南   | 各章节的内容要求和写作要点       |
+| `references/mermaid-patterns.md` | Mermaid 图模式 | 图表类型和使用场景               |
+| `assets/readme-template.md`      | README 模板    | 文档结构和占位符                 |
 
 如需定制输出格式，直接编辑上述文件即可。
 
@@ -361,12 +376,12 @@ AI：
 
 ## Roadmap
 
-- [x] 核心技能定义（SKILL.md）
-- [x] 伴侣指令文件（AGENTS.md）
-- [x] 各章节写作指南（21 章）
-- [x] Mermaid 图模式库（9 种模式）
-- [x] README 完整模板
-- [x] 跨平台安装脚本（10 个平台）
+- [X] 核心技能定义（SKILL.md）
+- [X] 伴侣指令文件（AGENTS.md）
+- [X] 各章节写作指南（21 章）
+- [X] Mermaid 图模式库（9 种模式）
+- [X] README 完整模板
+- [X] 跨平台安装脚本（10 个平台）
 - [ ] 英文版 README 生成支持
 - [ ] 多语言输出支持（日语、韩语等）
 - [ ] 增量更新模式（基于 diff 更新已有 README）
